@@ -2,13 +2,22 @@ import React from "react";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
+import { toggleMenu } from "../utils/appSlice";
+import { useDispatch } from "react-redux";
 
 const Head = () => {
+const dispatch = useDispatch();
+
+const toggleMenuHandler = () =>{
+  dispatch(toggleMenu());
+}
+
   return (
     <div className="grid grid-flow-col p-2 m-2 shadow-lg">
       <div className="flex col-span-1">
         <img
-          className="h-8 mr-8"
+        onClick={()=>toggleMenuHandler()}
+          className="h-8 mr-8 cursor-pointer"
           alt="menu-icon"
           src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/What%20is%20a%20Hamburger%20Button.png?width=225&name=What%20is%20a%20Hamburger%20Button.png"
         />
