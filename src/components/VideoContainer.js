@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { YOUTUBE_VIDEO_API } from '../utils/constants';
+import VideoCard from './VideoCard';
 
 // const keu = process.env.GOOGLE_API_KEY;
 
 const VideoContainer = () => {
 
-  const apikey  = process.env.REACT_APP_GOOGLE_API_KEY
-  console.log(apikey);
+  const [videos, setVideos] = useState([]);
+
+  // const apikey  = process.env.REACT_APP_GOOGLE_API_KEY
+  // console.log(apikey);
 
 
 
@@ -19,11 +22,12 @@ const VideoContainer = () => {
   const getVideos = async() =>{
     const videos = await fetch(YOUTUBE_VIDEO_API);
     const jsonData = await videos.json();
-    console.log(jsonData);
+    console.log(jsonData.items);
+    setVideos(jsonData.items)
   }
 
   return (
-    <div>VideoContainer</div>
+    <VideoCard info={videos}/>
   )
 }
 
