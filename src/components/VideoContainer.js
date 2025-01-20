@@ -25,7 +25,7 @@ const VideoContainer = () => {
 
   return (
     // <VideoCard info={videos[0]}/>
-    <div className="w-full h-40 flex justify-evenly mt-4">
+    <div className="w-full h-40 flex justify-evenly mt-4 flex-wrap">
       {videos.map((video, index) => {
         return <VideoCard key={index} info={video} />;
       })}

@@ -7,7 +7,7 @@ const VideoCard = ({info}) => {
   const {likeCount} = statistics;
 
   return (
-    <div className='w-44 h-20'>
+    <div className='w-44 h-20 mb-10'>
       <img className="rounded-lg" src={thumbnails.medium.url}/>
       <ul>
         <li className='italic'>{ title }</li>
