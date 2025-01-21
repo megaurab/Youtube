@@ -4,9 +4,11 @@ import MainContainer from "./MainContainer";
 
 const Body = () => {
   return (
-    <div className="grid grid-flow-col">
+    <div className="flex h-screen">
       <Sidebar />
-      <MainContainer />
+      <div className="flex-1 overflow-y-auto">
+        <MainContainer />
+      </div>
     </div>
   );
 };
