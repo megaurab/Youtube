@@ -8,9 +8,9 @@ const Sidebar = () => {
   if (!isMenuOpen) return null;
 
   return (
-    <div className="col-span-1 shadow-lg p-2 italic w-48 h-screen overflow-hidden">
+    <div className="col-span-1 shadow-lg p-2 italic w-48 h-screen overflow-hidden hide-scrollbar">
       {/* Add overflow-hidden to restrict the height to the screen */}
-      <div className="h-full flex flex-col overflow-y-auto">
+      <div className="h-full flex flex-col overflow-y-auto hide-scrollbar">
         <div className="flex mb-5">
           <img
             // onClick={()=>toggleMenuHandler()}
