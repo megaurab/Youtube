@@ -19,7 +19,7 @@ const VideoContainer = () => {
   return (
     <div className="w-full flex justify-evenly mt-4 flex-wrap overflow-y-auto hide-scrollbar">
       {videos.map((video, index) => {
-        return <Link to="/watch?v=HYPsSrqiksM"><VideoCard key={index} info={video} /></Link>;
+        return <Link to={"/watch?v="+video.id}><VideoCard key={index} info={video} /></Link>;
       })}
     </div>
   );
