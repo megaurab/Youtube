@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { toggleMenu } from "../utils/appSlice";
 import { useDispatch } from "react-redux";
+import { YOUTUBE_SEARCH_API } from "../utils/constants";
 
 const Head = () => {
-const dispatch = useDispatch();
+  const [searchQuery, setSearchquery] = useState("");
+  
 
-const toggleMenuHandler = () =>{
-  dispatch(toggleMenu());
-}
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      
+      getSearchSuggestions();
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  const getSearchSuggestions = async () => {
+    console.log("API_CALL:" +searchQuery);
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    // console.log(json);
+  };
+
+  const dispatch = useDispatch();
+
+  const toggleMenuHandler = () => {
+    dispatch(toggleMenu());
+  };
 
   return (
     <div className="grid grid-flow-col p-2 m-2 shadow-lg">
       <div className="flex col-span-1">
         <img
-        onClick={()=>toggleMenuHandler()}
+          onClick={() => toggleMenuHandler()}
           className="h-8 mr-8 cursor-pointer"
           alt="menu-icon"
           src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/What%20is%20a%20Hamburger%20Button.png?width=225&name=What%20is%20a%20Hamburger%20Button.png"
@@ -33,6 +55,8 @@ const toggleMenuHandler = () =>{
             className="bg-slate-300 rounded-3xl mr-4 px-40 py-1.5 italic mb-2"
             type="text"
             placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchquery(e.target.value)}
           />
           <div className="h-8 w-8 rounded-full bg-slate-300 flex items-center pl-1 mb-1.5">
             <button>
@@ -47,7 +71,9 @@ const toggleMenuHandler = () =>{
         </div>
       </div>
       <div className="col-span-1 w-8 h-8 bg-slate-300 rounded-full mt-1">
-        <button><FaRegUser className="h-4 w-4 mt-2"/></button>
+        <button>
+          <FaRegUser className="h-4 w-4 mt-2" />
+        </button>
       </div>
     </div>
   );
