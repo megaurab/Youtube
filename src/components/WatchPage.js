@@ -4,25 +4,29 @@ import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 
 const WatchPage = () => {
-const [ searchParams ] = useSearchParams();
-console.log(searchParams.get("v"));
+  const [searchParams] = useSearchParams();
+  // console.log(searchParams.get("v"));
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(closeMenu());
   }, []);
   return (
-    <div>
+    <div className="overflow-hidden pl-20 pt-5">
       <iframe
-        className="p-10"
-        width="1200"
-        height="600"
-        src={"https://www.youtube.com/embed/"+searchParams.get("v")}
+        className="rounded-2xl"
+        style={{
+          WebkitMaskImage:
+            "radial-gradient(circle, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)",
+        }}
+        width="840"
+        height="450"
+        src={"https://www.youtube.com/embed/" + searchParams.get("v")}
         title="YouTube video player"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
       ></iframe>
     </div>
   );
