@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch , useSelector } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
-import { YOUTUBE_MOST_WATCHED} from "../utils/constants";
+import { YOUTUBE_VIDEO_API} from "../utils/constants";
 import VideoCard from "./VideoCard";
 import { addVideos } from "../utils/videoSlice";
 
@@ -17,10 +17,10 @@ const WatchPage = () => {
   }, []);
 
    const getVideos = async () => {
-      const videos = await fetch(YOUTUBE_MOST_WATCHED);
+      const videos = await fetch(YOUTUBE_VIDEO_API);
       const jsonData = await videos.json();
       setMost(jsonData.items);
-      // console.log(jsonData.items);
+      console.log(jsonData.items);
       dispatch(addVideos(jsonData.items));
   
     };
