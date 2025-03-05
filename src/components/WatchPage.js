@@ -5,10 +5,13 @@ import { useSearchParams } from "react-router-dom";
 import { YOUTUBE_VIDEO_API} from "../utils/constants";
 import VideoCard from "./VideoCard";
 import { addVideos } from "../utils/videoSlice";
+import { Link } from "react-router-dom";
+import WatchPageUI  from "./WatchPageUI";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const [most, setMost] = useState([]);
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,7 +23,7 @@ const WatchPage = () => {
       const videos = await fetch(YOUTUBE_VIDEO_API);
       const jsonData = await videos.json();
       setMost(jsonData.items);
-      console.log(jsonData.items);
+      // console.log(jsonData.items);
       dispatch(addVideos(jsonData.items));
   
     };
@@ -29,7 +32,7 @@ const WatchPage = () => {
   
 
   return (
-    <div className="overflow-hidden pl-20 pt-5">
+    <div className="flex overflow-hidden pl-20 pt-5">
       <iframe
         className="rounded-2xl"
         style={{
@@ -45,8 +48,11 @@ const WatchPage = () => {
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       ></iframe>
-      <div>
-        <VideoCard info={most}/>
+      <div className="flex-1">
+        {most.map((video, index)=>{
+          return <Link key={index} to={"/watch?v="+video.id}><WatchPageUI info={video}/></Link>
+        })}
+        
       </div>
     </div>
   );
