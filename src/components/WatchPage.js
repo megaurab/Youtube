@@ -48,7 +48,7 @@ const WatchPage = () => {
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       ></iframe>
-      <div className="flex-1">
+      <div className="flex-1 ml-10 h-screen overflow-y-scroll hide-scrollbar">
         {most.map((video, index)=>{
           return <Link key={index} to={"/watch?v="+video.id}><WatchPageUI info={video}/></Link>
         })}
