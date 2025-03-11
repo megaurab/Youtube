@@ -3,15 +3,16 @@ import { useDispatch , useSelector } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import { YOUTUBE_VIDEO_API} from "../utils/constants";
-import VideoCard from "./VideoCard";
+// import VideoCard from "./VideoCard";
 import { addVideos } from "../utils/videoSlice";
 import { Link } from "react-router-dom";
 import WatchPageUI  from "./WatchPageUI";
+import { GOGLE_API_KEY } from "../utils/constants";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const [most, setMost] = useState([]);
-
+  const [videoe, setVideoe] = useState();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,9 +22,13 @@ const WatchPage = () => {
 
    const getVideos = async () => {
       const videos = await fetch(YOUTUBE_VIDEO_API);
+      const videoData = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${searchParams.get("v")}&key=${GOGLE_API_KEY}`)
       const jsonData = await videos.json();
+      const videoDetails = await videoData.json();
       setMost(jsonData.items);
+      setVideoe(videoDetails.items);
       // console.log(jsonData.items);
+      console.log(videoDetails);
       dispatch(addVideos(jsonData.items));
   
     };
@@ -33,6 +38,7 @@ const WatchPage = () => {
 
   return (
     <div className="flex overflow-hidden pl-20 pt-5">
+      <div>
       <iframe
         className="rounded-2xl"
         style={{
@@ -48,6 +54,10 @@ const WatchPage = () => {
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       ></iframe>
+      <div className="flex w-full font-bold pt-4 justify-start ">
+         <h1 className="text-xl">{videoe?.[0].snippet?.title}</h1>
+      </div>
+      </div>
       <div className="flex-1 ml-10 h-screen overflow-y-scroll hide-scrollbar">
         {most.map((video, index)=>{
           return <Link key={index} to={"/watch?v="+video.id}><WatchPageUI info={video}/></Link>
