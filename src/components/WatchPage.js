@@ -18,7 +18,11 @@ const WatchPage = () => {
   useEffect(() => {
     dispatch(closeMenu());
     getVideos();
+    getChannelData();
   }, []);
+
+  const channelId = videoe?.[0]?.snippet?.channelId;
+  console.log(channelId);
 
    const getVideos = async () => {
       const videos = await fetch(YOUTUBE_VIDEO_API);
@@ -28,11 +32,17 @@ const WatchPage = () => {
       setMost(jsonData.items);
       setVideoe(videoDetails.items);
       // console.log(jsonData.items);
-      console.log(videoDetails);
+      // console.log(videoDetails);
       dispatch(addVideos(jsonData.items));
   
     };
     
+    const getChannelData = async () =>{
+      const channelDa = await fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}&key=${GOGLE_API_KEY}`);
+      // const channelDa = await fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCSiDGb0MnHFGjs4E2WKvShw&key=AIzaSyDTB0jueGWrlkntpuHrr8CtKHKdg1mJHvs`)
+      const jsonData = await channelDa.json();
+      console.log(jsonData.items);
+    }
 
   
 
