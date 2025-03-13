@@ -71,8 +71,12 @@ const WatchPage = () => {
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
         ></iframe>
-        <div className="flex w-full font-bold pt-4 justify-start ">
+        <div className="flex flex-col w-full font-bold pt-4 justify-start ">
           <h1 className="text-xl">{videoe?.[0]?.snippet?.title}</h1>
+          <div>
+            <img src=""/>
+            <p>{videoe[0].snippet.channelTitle}</p>
+          </div>
         </div>
       </div>
       <div className="flex-1 ml-10 h-screen overflow-y-scroll hide-scrollbar">
