@@ -55,7 +55,7 @@ const WatchPage = () => {
 
   return (
     <div className="flex overflow-hidden pl-20 pt-5">
-      <div>
+      <div className="w-[68%]">
         <iframe
           className="rounded-2xl"
           style={{
@@ -71,11 +71,11 @@ const WatchPage = () => {
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
         ></iframe>
-        <div className="flex flex-col w-full font-bold pt-4 justify-start ">
+        <div className="flex flex-col font-bold pt-4 justify-center mr-20">
           <h1 className="text-xl">{videoe?.[0]?.snippet?.title}</h1>
           <div>
             <img src=""/>
-            <p>{videoe[0].snippet.channelTitle}</p>
+            <p>{videoe[0]?.snippet?.channelTitle}</p>
           </div>
         </div>
       </div>
